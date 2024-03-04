@@ -28,6 +28,14 @@ namespace MyWPF
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            //Name and Password Length Check
+            if (txtName.Text.Length < 3)
+            {
+                MessageBox.Show("A felhasználónév túl rövid!", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            //Name Check
             if (NamePasswordPair.Keys.Contains(txtName.Text))
             {
                 MessageBox.Show("A felhasználónév már foglalt!", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -35,11 +43,16 @@ namespace MyWPF
             }
             NamePasswordPair.Add(txtName.Text, txtPassword.Password.ToString());
 
+            //ListBox Write
             lbx.Items.Clear();
             foreach (var item in NamePasswordPair)
             {
                 lbx.Items.Add(item.Key);
             }
+
+            //TextBox Clear
+            txtName.Clear();
+            txtPassword.Clear();
         }
     }
 }
